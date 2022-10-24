@@ -1,7 +1,5 @@
-
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -73,4 +71,3 @@ function Login() {
 }
 
 export default Login;
-
