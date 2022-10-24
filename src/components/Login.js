@@ -1,10 +1,9 @@
+
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import AppContext from '../context/AppContext';
+
 
 function Login() {
-  // const { email, setEmail, password,
-  //   setPassword, isDisable, handleButtonClick } = useContext(AppContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisable, setIsDisable] = useState(true);
@@ -74,3 +73,4 @@ function Login() {
 }
 
 export default Login;
+
