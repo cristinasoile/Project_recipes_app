@@ -1,5 +1,13 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import Recipes from './pages/Recipes';
+import RecipeDetails from './pages/RecipeDetails';
+import RecipeInProgress from './pages/RecipeInProgress';
+import Profile from './pages/Profile';
+import DoneRecipes from './pages/DoneRecipes';
+import FavoriteRecipes from './pages/FavoriteRecipes';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
