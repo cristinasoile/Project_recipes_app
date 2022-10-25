@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -35,7 +35,6 @@ function Login() {
   return (
     <div>
       <form>
-        <Redirect to="/Meals" />
         <label htmlFor="email-input">
           <input
             data-testid="email-input"

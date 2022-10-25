@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import iconProfile from '../images/profileIcon.svg';
 import iconSearch from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 export default function Header(props) {
-  const [input, setInput] = useState(false);
+  const [input, setInput] = useState('');
+  const [showInput, setShowInput] = useState(false);
   const { title, search } = props;
 
   return (
@@ -28,7 +30,7 @@ export default function Header(props) {
             <button
               type="button"
               src={ iconSearch }
-              onClick={ () => setInput(!input) }
+              onClick={ () => setShowInput(!showInput) }
             >
               <img
                 data-testid="search-top-btn"
@@ -40,8 +42,14 @@ export default function Header(props) {
         }
 
         <h1 data-testid="page-title">{ title }</h1>
-        { input && <input type="text" data-testid="search-input" />}
+        { showInput && <input
+          type="text"
+          data-testid="search-input"
+          value={ input }
+          onChange={ ({ target }) => { setInput(target.value); } }
+        />}
       </section>
+      <SearchBar valueSearch={ input } title={ title } />
     </header>
 
   );
@@ -49,5 +57,5 @@ export default function Header(props) {
 
 Header.propTypes = {
   title: PropTypes.string,
-  search: PropTypes.bool,
+  search: PropTypes.string,
 }.isRequired;

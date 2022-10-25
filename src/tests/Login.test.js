@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
-import Login from '../pages/Login';
+import Login from '../components/Login';
 
 describe('Testar componentes da tela de Login', () => {
   const email = 'email-input';
