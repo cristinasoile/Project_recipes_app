@@ -1,10 +1,12 @@
 import React from 'react';
-import Footer from '../components/Footer';
+import Header from '../components/Header';
 
-export default function Profile() {
+function Profile() {
   return (
     <div>
-      <Footer />
+      <Header search="false" title="Profile" />
+      <h1>Profile</h1>
     </div>
   );
 }
+export default Profile;
