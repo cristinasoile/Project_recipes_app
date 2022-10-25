@@ -17,4 +17,5 @@ const RenderWithContext = (children) => {
     history,
   });
 };
+
 export default RenderWithContext;

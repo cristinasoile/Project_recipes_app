@@ -1,9 +1,10 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import renderWithContext from './renderWithContext';
 import App from '../App';
+import Meals from '../pages/Meals';
 
 afterEach(() => jest.clearAllMocks());
 
@@ -29,31 +30,30 @@ describe('Testa o componente SearchBar', () => {
     expect(btn).toBeInTheDocument();
   });
 
-  test('Testa se o filtro de ingrediente funciona depois de ser chamado pela API', async () => {
-    await act(async () => {
-      renderWithContext(<App />);
+  describe('Testa o componente SearchBar', () => {
+    test('Testa se o filtro de ingrediente funciona depois de ser chamado pela API', async () => {
+      await act(async () => {
+        renderWithContext(<Meals />);
+      });
+
+      const btnLupa = screen.getByTestId('search-top-btn');
+      expect(btnLupa).toBeInTheDocument();
+      userEvent.click(btnLupa);
+
+      const input = screen.getByTestId('search-input');
+      expect(input).toBeInTheDocument();
+      userEvent.type(input, 'chicken');
+
+      const ingredientSearch = screen.getByTestId('ingredient-search-radio');
+      expect(ingredientSearch).toBeInTheDocument();
+      userEvent.click(ingredientSearch);
+
+      const btnSearch = screen.getByTestId('exec-search-btn');
+      expect(btnSearch).toBeInTheDocument();
+      userEvent.click(btnSearch);
+
+      const recipe1 = screen.findByText(/brown stew chicken/i);
+      waitFor(() => expect(recipe1).toBeInTheDocument());
     });
-    const btnLupa = screen.getByTestId('search-top-btn');
-    expect(btnLupa).toBeInTheDocument();
-
-    userEvent.click(btnLupa);
-    const input = screen.getByTestId('search-input');
-    expect(input).toBeInTheDocument();
-    userEvent.type(input, 'chicken');
-
-    const ingredientSearch = screen.getByTestId('ingredient-search-radio');
-    expect(ingredientSearch).toBeInTheDocument();
-    userEvent.click(ingredientSearch);
-
-    const inputSearch = screen.getByTestId('search-input');
-    expect(inputSearch).toBeInTheDocument();
-    userEvent.type(inputSearch, 'chicken');
-
-    const btnSearch = screen.getByTestId('exec-search-btn');
-    expect(btnSearch).toBeInTheDocument();
-
-    userEvent.click(btnSearch);
-    recipe1 = screen.getByRole('heading', { name: /brown stew chicken/i });
-    expect(recipe1).toBeInTheDocument();
   });
 });
