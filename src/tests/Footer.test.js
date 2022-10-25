@@ -1,8 +1,10 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import renderWithRouter from './renderWithRouter';
-import App from '../App';
+import renderWithContext from './renderWithContext';
+import Meals from '../pages/Meals';
+import Drinks from '../pages/Drinks';
+import Profile from '../pages/Profile';
 
 describe('Testar o componente Footer', () => {
   const footer = 'footer';
@@ -10,7 +12,7 @@ describe('Testar o componente Footer', () => {
   const mealsBtn = 'meals-bottom-btn';
 
   it('verifica se os botões estão no path "/meals"', () => {
-    renderWithRouter(<App />, ['/meals']);
+    renderWithContext(<Meals />);
 
     expect(screen.getByTestId(footer)).toBeInTheDocument();
     expect(screen.getByTestId(drinksBtn)).toBeInTheDocument();
@@ -18,7 +20,7 @@ describe('Testar o componente Footer', () => {
   });
 
   it('verifica se os botões estão no path "/drinks"', () => {
-    renderWithRouter(<App />, ['/drinks']);
+    renderWithContext(<Drinks />);
 
     expect(screen.getByTestId(footer)).toBeInTheDocument();
     expect(screen.getByTestId(drinksBtn)).toBeInTheDocument();
@@ -26,7 +28,7 @@ describe('Testar o componente Footer', () => {
   });
 
   it('verifica se os botões estão no path "/profile"', () => {
-    renderWithRouter(<App />, ['/profile']);
+    renderWithContext(<Profile />);
 
     expect(screen.getByTestId(footer)).toBeInTheDocument();
     expect(screen.getByTestId(drinksBtn)).toBeInTheDocument();
@@ -34,7 +36,7 @@ describe('Testar o componente Footer', () => {
   });
 
   it('verifica se no botão Drinks leva para o path "/drinks" ', () => {
-    const { history } = renderWithRouter(<App />, ['/profile']);
+    const { history } = renderWithContext(<Profile />);
 
     const btnDrinks = screen.getByTestId(drinksBtn);
 
@@ -46,7 +48,7 @@ describe('Testar o componente Footer', () => {
   });
 
   it('verifica se no botão Drinks leva para o path "/meals" ', () => {
-    const { history } = renderWithRouter(<App />, ['/profile']);
+    const { history } = renderWithContext(<Profile />);
 
     const btnMeals = screen.getByTestId(mealsBtn);
 
