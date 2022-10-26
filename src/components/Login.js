@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import AppContext from '../context/AppContext';
 
 function Login() {
-  const [email, setEmail] = useState('');
+  const { email, setEmail } = useContext(AppContext);
   const [password, setPassword] = useState('');
   const [isDisable, setIsDisable] = useState(true);
   const history = useHistory();
