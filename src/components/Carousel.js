@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 
 export default function Carousel({ recommendations }) {
@@ -74,6 +75,5 @@ Carousel.propTypes = {
     img: PropTypes.string,
   }).isRequired,
 };
-
 // next and back button
 // https://stackoverflow.com/questions/63566290/how-to-implement-previous-and-next-buttons-in-react
