@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import renderWithRouter from './renderWithRouter';
+import renderWithContext from './renderWithContext';
 import Login from '../components/Login';
 
 describe('Testar componentes da tela de Login', () => {
@@ -9,14 +9,14 @@ describe('Testar componentes da tela de Login', () => {
   const password = 'password-input';
   const btnLogin = 'login-submit-btn';
   it('verifica se os inputs e o botão está na tela', () => {
-    render(<Login />);
+    renderWithContext(<Login />);
     expect(screen.getByTestId(email)).toBeInTheDocument();
     expect(screen.getByTestId(password)).toBeInTheDocument();
     expect(screen.getByTestId(btnLogin)).toBeInTheDocument();
   });
 
   it('verifica se o botão redireciona para a página /meals', () => {
-    const { history } = renderWithRouter(<Login />);
+    const { history } = renderWithContext(<Login />);
     const emailInput = screen.getByTestId(email);
     const passwordInput = screen.getByTestId(password);
     const button = screen.getByTestId(btnLogin);
@@ -30,7 +30,7 @@ describe('Testar componentes da tela de Login', () => {
   });
 
   it('verifica se o botão é ativado apenas quando os inputs estão corretos', () => {
-    render(<Login />);
+    renderWithContext(<Login />);
 
     userEvent.type(screen.getByTestId(email), 'emailErrado');
     userEvent.type(screen.getByTestId(password), '111');
