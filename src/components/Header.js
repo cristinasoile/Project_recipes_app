@@ -49,7 +49,7 @@ export default function Header(props) {
           onChange={ ({ target }) => { setInput(target.value); } }
         />}
       </section>
-      <SearchBar valueSearch={ input } title={ title } />
+      { search === 'true' && <SearchBar valueSearch={ input } title={ title } /> }
     </header>
 
   );
