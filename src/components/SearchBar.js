@@ -70,6 +70,9 @@ export default function SearchBar({ valueSearch, title }) {
       break;
     case 'firstLetter':
       data = caseFirstLetter();
+      if (data.meals == null && data.drinks == null) {
+        return;
+      }
       break;
     default:
       setRecipeList([]);

@@ -32,12 +32,15 @@ describe('Testar componentes da tela de Login', () => {
   it('verifica se o botão é ativado apenas quando os inputs estão corretos', () => {
     renderWithContext(<Login />);
 
-    userEvent.type(screen.getByTestId(email), 'emailErrado');
+    const emailInput = screen.getByTestId(email);
+    const passwordInput = screen.getByTestId(password);
+
+    userEvent.type(emailInput, 'emailErrado');
     userEvent.type(screen.getByTestId(password), '111');
     expect(screen.getByTestId('login-submit-btn')).toHaveProperty('disabled', true);
 
-    userEvent.type(email, 'teste@gmail.com');
-    userEvent.type(password, '1234567');
+    userEvent.type(emailInput, 'teste@gmail.com');
+    userEvent.type(passwordInput, '1234567');
     expect(screen.getByTestId('password-input')).toHaveProperty('disabled', false);
   });
 });
