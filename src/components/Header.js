@@ -9,9 +9,9 @@ export default function Header(props) {
   const [input, setInput] = useState('');
   const [showInput, setShowInput] = useState(false);
   const { title, search } = props;
-
   return (
     <header>
+
       <section>
         <Link to="/profile">
           <button
@@ -49,7 +49,8 @@ export default function Header(props) {
           onChange={ ({ target }) => { setInput(target.value); } }
         />}
       </section>
-      <SearchBar valueSearch={ input } title={ title } />
+      { search === 'true' && <SearchBar valueSearch={ input } title={ title } /> }
+
     </header>
 
   );

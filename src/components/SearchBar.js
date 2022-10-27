@@ -23,6 +23,7 @@ export default function SearchBar({ valueSearch, title }) {
   const caseName = async () => {
     let data;
     if (title === 'Meals') {
+      console.log('AQU');
       data = await mealsNameApi(valueSearch);
       setRecipeList(data.meals);
       return data;
@@ -70,6 +71,9 @@ export default function SearchBar({ valueSearch, title }) {
       break;
     case 'firstLetter':
       data = caseFirstLetter();
+      if (data.meals == null && data.drinks == null) {
+        return;
+      }
       break;
     default:
       setRecipeList([]);
@@ -132,7 +136,6 @@ export default function SearchBar({ valueSearch, title }) {
             onClick={ handleClick }
           >
             Search
-
           </button>
         </div>
       </section>
