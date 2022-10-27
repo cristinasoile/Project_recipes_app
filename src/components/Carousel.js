@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Card from 'react-bootstrap/Card';
+// import Card from 'react-bootstrap/Card';
+import RecipeCard from './RecipeCard';
 
 export default function Carousel({ recommendations }) {
   const [count, setCount] = useState(0);
@@ -31,9 +32,6 @@ export default function Carousel({ recommendations }) {
     }
   };
 
-  const toggleHidden = (i) => (
-    i === count || i === count + 1);
-
   return (
     <section>
       <button
@@ -42,8 +40,16 @@ export default function Carousel({ recommendations }) {
       >
         Back
       </button>
+      { recommendations }
       {
         recommedationsTreated.map((recipe, i) => (
+          <RecipeCard
+            key={ i }
+            id={ recipe.id }
+            name={ recipe.title }
+            img={ recipe.img }
+          />
+          /*
           <Card
             style={ { width: '18rem' } }
             data-testid={ `${i}-recommendation-card` }
@@ -53,9 +59,11 @@ export default function Carousel({ recommendations }) {
             <Card.Img variant="top" src={ recipe.img } />
             <Card.Body>
               <Card.Title>{recipe.title}</Card.Title>
-              {/* <Button variant="primary">Go somewhere</Button> */}
+
+              {<Button variant="primary">Go somewhere</Button>}
             </Card.Body>
           </Card>
+          */
         ))
       }
       <button

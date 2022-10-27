@@ -37,12 +37,16 @@ export default function RecipeDetails({ location: { pathname } }) {
       return receita && tipo;
     };
     handleRecipeandRecipeType();
-  }, []);
+  });
 
   return (
     <div>
       <RecipeDetailCard recipe={ recipe } recipeType={ recipeType } />
-      <Carousel recommedations={ recommendations } />
+      {
+        recommendations
+        && recommendations.length
+        && <Carousel recommedations={ recommendations } />
+      }
     </div>
   );
 }

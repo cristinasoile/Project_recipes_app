@@ -60,7 +60,8 @@ export async function mealRecommendationApi() {
   const data = await response.json();
   const MAX_RECONMENDATION_LENGTH = 6;
 
-  const reconmendation = data.filter((e, index) => index < MAX_RECONMENDATION_LENGTH);
+  const reconmendation = data.meals
+    .filter((e, index) => index < MAX_RECONMENDATION_LENGTH);
 
   return reconmendation;
 }
@@ -71,7 +72,32 @@ export async function drinkRecommendationApi() {
   const data = await response.json();
   const MAX_RECONMENDATION_LENGTH = 6;
 
-  const reconmendation = data.filter((e, index) => index < MAX_RECONMENDATION_LENGTH);
+  const reconmendation = data.drinks
+    .filter((e, index) => index < MAX_RECONMENDATION_LENGTH);
+
+  return reconmendation;
+}
+
+export async function meals12recipesApi() {
+  const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const response = await fetch(url);
+  const data = await response.json();
+  const MAX_RECONMENDATION_LENGTH = 12;
+
+  const reconmendation = data.meals
+    .filter((e, index) => index < MAX_RECONMENDATION_LENGTH);
+
+  return reconmendation;
+}
+
+export async function drinks12recipesApi() {
+  const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+  const response = await fetch(url);
+  const data = await response.json();
+  const MAX_RECONMENDATION_LENGTH = 12;
+
+  const reconmendation = data.drinks
+    .filter((e, index) => index < MAX_RECONMENDATION_LENGTH);
 
   return reconmendation;
 }
