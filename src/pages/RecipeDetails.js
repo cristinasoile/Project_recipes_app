@@ -7,20 +7,17 @@ import { mealDetailsApi, drinkDetailsApi } from '../helpers/API';
 
 export default function RecipeDetails({ location: { pathname } }) {
   const [recipe, setRecipe] = useState([]);
-  const [recipeType, setRecipeType] = useState('');
 
   const { id } = useParams();
 
   const fecthMealsDetails = async (idRecipe) => {
     const recipeDetail = await mealDetailsApi(idRecipe);
     setRecipe(recipeDetail.meals);
-    setRecipeType('meals');
   };
 
   const fecthDrinksDetails = async (idRecipe) => {
     const drinkDetail = await drinkDetailsApi(idRecipe);
     setRecipe(drinkDetail.drinks);
-    setRecipeType('drinks');
   };
 
   useEffect(() => {
@@ -32,11 +29,11 @@ export default function RecipeDetails({ location: { pathname } }) {
       return receita;
     };
     handleRecipeandRecipeType();
-  }, []);
+  }, [id, pathname]);
 
   return (
     <div>
-      <RecipeDetailCard recipe={ recipe } recipeType={ recipeType } />
+      <RecipeDetailCard recipe={ recipe } />
       <Carousel />
     </div>
   );

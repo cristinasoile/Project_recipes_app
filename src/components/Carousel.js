@@ -9,12 +9,12 @@ export default function Carousel() {
 
   const location = useLocation();
 
-  const x = async () => {
+  const meals = async () => {
     const mealsRecommendation = await mealRecommendationApi();
     setRecipes(mealsRecommendation);
   };
 
-  const y = async () => {
+  const drinks = async () => {
     const drinksRecommendation = await drinkRecommendationApi();
     setRecipes(drinksRecommendation);
   };
@@ -22,9 +22,7 @@ export default function Carousel() {
   useEffect(() => {
     const recommendations = async () => {
       const { pathname } = location;
-      const recipeType = pathname.includes('meals')
-        ? x()
-        : y();
+      const recipeType = pathname.includes('meals') ? await drinks() : await meals();
       return recipeType;
     };
     recommendations();
