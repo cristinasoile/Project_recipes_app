@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
+import { useLocation } from 'react-router-dom';
 import { mealRecommendationApi, drinkRecommendationApi } from '../helpers/API';
 
-export default function Carousel({ type }) {
+export default function Carousel() {
   const [count, setCount] = useState(0);
   const [recipes, setRecipes] = useState([]);
 
+  const location = useLocation();
+
+  const x = async () => {
+    const mealsRecommendation = await mealRecommendationApi();
+    setRecipes(mealsRecommendation);
+  };
+
+  const y = async () => {
+    const drinksRecommendation = await drinkRecommendationApi();
+    setRecipes(drinksRecommendation);
+  };
+
   useEffect(() => {
     const recommendations = async () => {
-      if (type === 'meals') {
-        setRecipes(await mealRecommendationApi());
-      } else if (type === 'drinks') {
-        setRecipes(await drinkRecommendationApi());
-      }
+      const { pathname } = location;
+      const recipeType = pathname.includes('meals')
+        ? x()
+        : y();
+      return recipeType;
     };
     recommendations();
-  }, [type]);
+  }, [location]);
 
   const btnBack = () => {
     const upperLimit = 4;
@@ -83,8 +95,5 @@ export default function Carousel({ type }) {
   );
 }
 
-Carousel.propTypes = {
-  type: PropTypes.string.isRequired,
-};
 // next and back button
 // https://stackoverflow.com/questions/63566290/how-to-implement-previous-and-next-buttons-in-react

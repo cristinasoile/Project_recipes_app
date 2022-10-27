@@ -37,7 +37,7 @@ export default function RecipeDetails({ location: { pathname } }) {
   return (
     <div>
       <RecipeDetailCard recipe={ recipe } recipeType={ recipeType } />
-      <Carousel type={ recipeType } />
+      <Carousel />
     </div>
   );
 }
