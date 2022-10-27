@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useHistory } from 'react-router-dom';
 import RecipeDetailCard from '../components/RecipeDetailCard';
 import Carousel from '../components/Carousel';
 import { mealDetailsApi, drinkDetailsApi } from '../helpers/API';
+import AppContext from '../context/AppContext';
 
 export default function RecipeDetails({ location: { pathname } }) {
-  const [recipe, setRecipe] = useState([]);
-
+  const { setRecipe } = useContext(AppContext);
   const { id } = useParams();
   const history = useHistory();
 
   const fecthMealsDetails = async (idRecipe) => {
     const recipeDetail = await mealDetailsApi(idRecipe);
     setRecipe(recipeDetail.meals);
-    console.log('1 console', recipeDetail);
   };
 
   const fecthDrinksDetails = async (idRecipe) => {
@@ -23,7 +22,6 @@ export default function RecipeDetails({ location: { pathname } }) {
   };
 
   const handleClick = () => {
-    console.log('sentido?', recipe);
     const route = pathname;
     if (route.includes('meals')) {
       history.push(`/meals/${recipe[0].idMeal}/in-progress`);
@@ -51,7 +49,7 @@ export default function RecipeDetails({ location: { pathname } }) {
   return (
 
     <div>
-      <RecipeDetailCard recipe={ recipe } />
+      <RecipeDetailCard />
       <Carousel />
       <button
         type="button"

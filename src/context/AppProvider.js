@@ -9,6 +9,7 @@ function AppProvider({ children }) {
   const [category, setCategory] = useState([]);
   const [categoryResults, setCategoryResults] = useState([]);
   const [categoryClicked, setCategoryClicked] = useState(false);
+  const [recipe, setRecipe] = useState([]);
 
   const contexto = useMemo(() => ({
     title,
@@ -18,12 +19,14 @@ function AppProvider({ children }) {
     email,
     setEmail,
     category,
+    recipe,
     setCategory,
     categoryResults,
     setCategoryResults,
     categoryClicked,
     setCategoryClicked,
-  }), [email, title, recipeList, category, categoryClicked, categoryResults]);
+    setRecipe,
+  }), [email, title, recipeList, category, categoryClicked, categoryResults, recipe]);
 
   // pega as 5 categories de meals
   useEffect(() => {
