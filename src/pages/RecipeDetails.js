@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import RecipeDetailCard from '../components/RecipeDetailCard';
 import Carousel from '../components/Carousel';
 import { mealDetailsApi, drinkDetailsApi } from '../helpers/API';
@@ -9,15 +9,27 @@ export default function RecipeDetails({ location: { pathname } }) {
   const [recipe, setRecipe] = useState([]);
 
   const { id } = useParams();
+  const history = useHistory();
 
   const fecthMealsDetails = async (idRecipe) => {
     const recipeDetail = await mealDetailsApi(idRecipe);
     setRecipe(recipeDetail.meals);
+    console.log('1 console', recipeDetail);
   };
 
   const fecthDrinksDetails = async (idRecipe) => {
     const drinkDetail = await drinkDetailsApi(idRecipe);
     setRecipe(drinkDetail.drinks);
+  };
+
+  const handleClick = () => {
+    console.log('sentido?', recipe);
+    const route = pathname;
+    if (route.includes('meals')) {
+      history.push(`/meals/${recipe[0].idMeal}/in-progress`);
+    } else {
+      history.push(`/drinks/${recipe[0].idDrink}/in-progress`);
+    }
   };
 
   useEffect(() => {
@@ -31,10 +43,24 @@ export default function RecipeDetails({ location: { pathname } }) {
     handleRecipeandRecipeType();
   }, [id, pathname]);
 
+  const styles = {
+    position: 'fixed',
+    bottom: '0px',
+  };
+
   return (
+
     <div>
       <RecipeDetailCard recipe={ recipe } />
       <Carousel />
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        style={ styles }
+        onClick={ handleClick }
+      >
+        Start Recipe
+      </button>
     </div>
   );
 }
