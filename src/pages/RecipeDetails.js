@@ -39,6 +39,7 @@ export default function RecipeDetails({ location: { pathname } }) {
     handleRecipeandRecipeType();
   });
 
+
   return (
     <div>
       <RecipeDetailCard recipe={ recipe } recipeType={ recipeType } />

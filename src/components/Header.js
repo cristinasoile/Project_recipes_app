@@ -50,7 +50,6 @@ export default function Header(props) {
         />}
       </section>
       { search === 'true' && <SearchBar valueSearch={ input } title={ title } /> }
-
     </header>
 
   );
