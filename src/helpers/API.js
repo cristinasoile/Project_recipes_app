@@ -61,7 +61,11 @@ export async function mealRecommendationApi() {
   const MAX_RECONMENDATION_LENGTH = 6;
 
   const reconmendation = data.meals
-    .filter((e, index) => index < MAX_RECONMENDATION_LENGTH);
+    .filter((e, index) => index < MAX_RECONMENDATION_LENGTH).map((e) => ({
+      id: e.idMeal,
+      title: e.strMeal,
+      img: e.strMealThumb,
+    }));
 
   return reconmendation;
 }
@@ -73,7 +77,11 @@ export async function drinkRecommendationApi() {
   const MAX_RECONMENDATION_LENGTH = 6;
 
   const reconmendation = data.drinks
-    .filter((e, index) => index < MAX_RECONMENDATION_LENGTH);
+    .filter((e, index) => index < MAX_RECONMENDATION_LENGTH).map((e) => ({
+      id: e.idDrink,
+      title: e.strDrink,
+      img: e.strDrinkThumb,
+    }));
 
   return reconmendation;
 }

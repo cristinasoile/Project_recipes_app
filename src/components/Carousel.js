@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import Card from 'react-bootstrap/Card';
-import RecipeCard from './RecipeCard';
+import Card from 'react-bootstrap/Card';
+import { mealRecommendationApi, drinkRecommendationApi } from '../helpers/API';
 
-export default function Carousel({ recommendations }) {
+export default function Carousel({ type }) {
   const [count, setCount] = useState(0);
+  const [recipes, setRecipes] = useState([]);
 
-  const recipes = recommendations;
-  const recommedationsTreated = recipes.map((e) => ({
-    id: e.idDrink || e.idMeal,
-    title: e.strDrink || e.strMeal,
-    img: e.strDrinkThumb || e.strMealThumb,
-  }));
+  useEffect(() => {
+    const recommendations = async () => {
+      if (type === 'meals') {
+        setRecipes(await mealRecommendationApi());
+      } else if (type === 'drinks') {
+        setRecipes(await drinkRecommendationApi());
+      }
+    };
+    recommendations();
+  }, [type]);
 
   const btnBack = () => {
     const upperLimit = 4;
@@ -32,6 +37,9 @@ export default function Carousel({ recommendations }) {
     }
   };
 
+  const toggleHidden = (i) => (
+    i === count || i === count + 1);
+
   return (
     <section>
       <button
@@ -40,30 +48,29 @@ export default function Carousel({ recommendations }) {
       >
         Back
       </button>
-      { recommendations }
       {
-        recommedationsTreated.map((recipe, i) => (
-          <RecipeCard
-            key={ i }
-            id={ recipe.id }
-            name={ recipe.title }
-            img={ recipe.img }
-          />
-          /*
+        recipes.map((e, i) => (
           <Card
-            style={ { width: '18rem' } }
+            style={ { width: '250px' } }
             data-testid={ `${i}-recommendation-card` }
-            key={ recipe.id }
+            key={ e.id }
             hidden={ !toggleHidden(i) }
           >
-            <Card.Img variant="top" src={ recipe.img } />
+            <Card.Img
+              style={ { width: '250px' } }
+              variant="top"
+              className="card-img"
+              src={ e.img }
+            />
             <Card.Body>
-              <Card.Title>{recipe.title}</Card.Title>
-
-              {<Button variant="primary">Go somewhere</Button>}
+              <Card.Title
+                data-testid={ `${i}-recommendation-title` }
+              >
+                {e.title}
+              </Card.Title>
+              {/* <Button variant="primary">Go somewhere</Button> */}
             </Card.Body>
           </Card>
-          */
         ))
       }
       <button
@@ -77,11 +84,7 @@ export default function Carousel({ recommendations }) {
 }
 
 Carousel.propTypes = {
-  recommendations: PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string,
-    img: PropTypes.string,
-  }).isRequired,
+  type: PropTypes.string.isRequired,
 };
 // next and back button
 // https://stackoverflow.com/questions/63566290/how-to-implement-previous-and-next-buttons-in-react
