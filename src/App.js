@@ -7,7 +7,7 @@ import Login from './components/Login';
 import RecipeDetails from './pages/RecipeDetails';
 import drinkInProgress from './pages/drinkInProgress';
 import mealsInProgress from './pages/mealsInProgress';
-import DoneRecipes from './pages/DoneRecipes';
+import DoneRecipesPage from './pages/DoneRecipesPage';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import ProfilePage from './pages/ProfilePage';
 import Recipes from './components/Recipes';
@@ -25,7 +25,7 @@ function App() {
           <Route exact path="/drinks/:id/in-progress" component={ drinkInProgress } />
           <Route exact path="/meals/:id/in-progress" component={ mealsInProgress } />
           <Route exact path="/profile" component={ ProfilePage } />
-          <Route exact path="/done-recipes" component={ DoneRecipes } />
+          <Route exact path="/done-recipes" component={ DoneRecipesPage } />
           <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
         </AppProvider>
       </Switch>

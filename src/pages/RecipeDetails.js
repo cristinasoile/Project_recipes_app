@@ -7,7 +7,7 @@ import { mealDetailsApi, drinkDetailsApi } from '../helpers/API';
 import AppContext from '../context/AppContext';
 
 export default function RecipeDetails({ location: { pathname } }) {
-  const { setRecipe } = useContext(AppContext);
+  const { recipe, setRecipe } = useContext(AppContext);
   const { id } = useParams();
   const history = useHistory();
 
