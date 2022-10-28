@@ -56,26 +56,35 @@ export async function drinkDetailsApi(id) {
 
 export async function mealRecommendationApi() {
   const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+
   const response = await fetch(url);
   const data = await response.json();
-  const MAX_RECONMENDATION_LENGTH = 6;
+  const MAX_RECOMMENDATION_LENGTH = 6;
 
-  const reconmendation = data.meals
-    .filter((e, index) => index < MAX_RECONMENDATION_LENGTH);
+  const recommendation = data.meals
+    .filter((e, index) => index < MAX_RECOMMENDATION_LENGTH).map((e) => ({
+      id: e.idMeal,
+      title: e.strMeal,
+      img: e.strMealThumb,
+    }));
 
-  return reconmendation;
+  return recommendation;
 }
 
 export async function drinkRecommendationApi() {
   const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const response = await fetch(url);
   const data = await response.json();
-  const MAX_RECONMENDATION_LENGTH = 6;
+  const MAX_RECOMMENDATION_LENGTH = 6;
 
-  const reconmendation = data.drinks
-    .filter((e, index) => index < MAX_RECONMENDATION_LENGTH);
+  const recommendation = data.drinks
+    .filter((e, index) => index < MAX_RECOMMENDATION_LENGTH).map((e) => ({
+      id: e.idDrink,
+      title: e.strDrink,
+      img: e.strDrinkThumb,
+    }));
 
-  return reconmendation;
+  return recommendation;
 }
 
 export async function meals12recipesApi() {

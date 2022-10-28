@@ -1,13 +1,14 @@
 import React from 'react';
 import Header from '../components/Header';
+import DoneRecipes from '../components/DoneRecipes';
 
-function DoneRecipes() {
+function DoneRecipesPage() {
   return (
     <div>
       <Header title="Done Recipes" search="false" />
-      <h1>Done Recipes</h1>
+      <DoneRecipes />
     </div>
   );
 }
 
-export default DoneRecipes;
+export default DoneRecipesPage;

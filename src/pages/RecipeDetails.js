@@ -1,52 +1,64 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import RecipeDetailCard from '../components/RecipeDetailCard';
 import Carousel from '../components/Carousel';
-import { mealDetailsApi, drinkDetailsApi,
-  mealRecommendationApi, drinkRecommendationApi } from '../helpers/API';
+import { mealDetailsApi, drinkDetailsApi } from '../helpers/API';
+import AppContext from '../context/AppContext';
 
 export default function RecipeDetails({ location: { pathname } }) {
-  const [recipe, setRecipe] = useState([]);
-  const [recommendations, setRecommendations] = useState([]);
-  const [recipeType, setRecipeType] = useState('');
-
+  const { recipe, setRecipe } = useContext(AppContext);
   const { id } = useParams();
+  const history = useHistory();
 
-  const fecthMealsDetails = async () => {
-    const recipeDetail = await mealDetailsApi(id);
-    const recommendation = await mealRecommendationApi();
+  const fecthMealsDetails = async (idRecipe) => {
+    const recipeDetail = await mealDetailsApi(idRecipe);
     setRecipe(recipeDetail.meals);
-    setRecommendations(recommendation.meals);
   };
 
-  const fecthDrinksDetails = async () => {
-    const drinkDetail = await drinkDetailsApi(id);
-    const recommendation = await drinkRecommendationApi();
+  const fecthDrinksDetails = async (idRecipe) => {
+    const drinkDetail = await drinkDetailsApi(idRecipe);
     setRecipe(drinkDetail.drinks);
-    setRecommendations(recommendation.drinks);
+  };
+
+  const handleClick = () => {
+    const route = pathname;
+    if (route.includes('meals')) {
+      history.push(`/meals/${recipe[0].idMeal}/in-progress`);
+    } else {
+      history.push(`/drinks/${recipe[0].idDrink}/in-progress`);
+    }
   };
 
   useEffect(() => {
     const handleRecipeandRecipeType = async () => {
       const route = pathname;
       const receita = route.includes('meals')
-        ? await fecthMealsDetails() : await fecthDrinksDetails();
-      const tipo = route.includes('meals')
-        ? setRecipeType('meals') : setRecipeType('drinks');
-      return receita && tipo;
+        ? await fecthMealsDetails(id)
+        : await fecthDrinksDetails(id);
+      return receita;
     };
     handleRecipeandRecipeType();
-  });
+  }, [id, pathname]);
+
+  const styles = {
+    position: 'fixed',
+    bottom: '0px',
+  };
 
   return (
+
     <div>
-      <RecipeDetailCard recipe={ recipe } recipeType={ recipeType } />
-      {
-        recommendations
-        && recommendations.length
-        && <Carousel recommedations={ recommendations } />
-      }
+      <RecipeDetailCard />
+      <Carousel />
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        style={ styles }
+        onClick={ handleClick }
+      >
+        Start Recipe
+      </button>
     </div>
   );
 }
