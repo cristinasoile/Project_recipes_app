@@ -27,6 +27,7 @@ export default function RecipeDetailCard() {
                 src={ e.strMealThumb }
                 alt="Imagem da receita"
                 data-testid="recipe-photo"
+                style={ { width: '100px', maxHeight: '200px' } }
               />
               <h3>Ingredients</h3>
               { indexes.map((i) => (

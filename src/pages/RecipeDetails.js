@@ -1,12 +1,17 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useHistory } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import RecipeDetailCard from '../components/RecipeDetailCard';
 import Carousel from '../components/Carousel';
 import { mealDetailsApi, drinkDetailsApi } from '../helpers/API';
 import AppContext from '../context/AppContext';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function RecipeDetails({ location: { pathname } }) {
+  const [isCopied, setIsCopied] = useState(false);
   const { recipe, setRecipe } = useContext(AppContext);
   const { id } = useParams();
   const history = useHistory();
@@ -30,6 +35,29 @@ export default function RecipeDetails({ location: { pathname } }) {
     }
   };
 
+  const handleCopy = () => {
+    const url = window.location.href;
+    copy(url);
+    setIsCopied(true);
+  };
+
+  const handleFavorite = () => {
+    const getFavoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const setFavoriteRecipes = [
+      ...getFavoriteRecipes,
+      {
+        id: recipe[0].idDrink || recipe[0].idMeal,
+        type: pathname.includes('drink') ? 'drink' : 'meal',
+        nationality: recipe[0].strArea || '',
+        category: recipe[0].strCategory,
+        alcoholicOrNot: recipe[0].strAlcoholic || '',
+        name: recipe[0].strDrink || recipe[0].strMeal,
+        image: recipe[0].strDrinkThumb || recipe[0].strMealThumb,
+      },
+    ];
+    localStorage.setItem('favoriteRecipes', JSON.stringify(setFavoriteRecipes));
+  };
+
   useEffect(() => {
     const handleRecipeandRecipeType = async () => {
       const route = pathname;
@@ -50,6 +78,23 @@ export default function RecipeDetails({ location: { pathname } }) {
 
     <div>
       <RecipeDetailCard />
+      <div>
+        <input
+          type="image"
+          src={ shareIcon }
+          alt="Compartilhar receita"
+          data-testid="share-btn"
+          onClick={ () => handleCopy() }
+        />
+        {isCopied && <span>Link copied!</span>}
+        <input
+          type="image"
+          src={ whiteHeartIcon }
+          alt="Favoritar receita"
+          data-testid="favorite-btn"
+          onClick={ () => handleFavorite() }
+        />
+      </div>
       <Carousel />
       <button
         type="button"
