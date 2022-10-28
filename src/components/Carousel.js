@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Card from 'react-bootstrap/Card';
 import { useLocation } from 'react-router-dom';
 import { mealRecommendationApi, drinkRecommendationApi } from '../helpers/API';
 
@@ -60,27 +59,19 @@ export default function Carousel() {
       </button>
       {
         recipes.map((e, i) => (
-          <Card
-            style={ { width: '250px' } }
+          <div
+            key={ i }
             data-testid={ `${i}-recommendation-card` }
-            key={ e.id }
             hidden={ !toggleHidden(i) }
           >
-            <Card.Img
-              style={ { width: '250px' } }
-              variant="top"
-              className="card-img"
+            <h3 data-testid={ `${i}-recommendation-title` }>{ e.title }</h3>
+            <img
+              style={ { width: '100px', maxHeight: '200px' } }
               src={ e.img }
+              alt={ e.name }
+              data-testid={ `${i}-card-img` }
             />
-            <Card.Body>
-              <Card.Title
-                data-testid={ `${i}-recommendation-title` }
-              >
-                {e.title}
-              </Card.Title>
-              {/* <Button variant="primary">Go somewhere</Button> */}
-            </Card.Body>
-          </Card>
+          </div>
         ))
       }
       <button
