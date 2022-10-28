@@ -57,15 +57,16 @@ export default function RecipeDetailCard() {
                 src={ e.strDrinkThumb }
                 alt="Imagem da receita"
               />
-              <h3>Ingredientes</h3>
               { indexes.map((i) => (
-                <div
-                  data-testid={ `${i - 1}-ingredient-name-and-measure` }
-                  key={ i }
-                  style={ { display: 'flex', gap: '4px' } }
-                >
-                  <div>{recipe.length && recipe[0][`strIngredient${i}`]}</div>
-                  <div>{recipe.length && recipe[0][`strMeasure${i}`]}</div>
+                <div key={ i }>
+                  <h3>Ingredientes</h3>
+                  <div
+                    data-testid={ `${i - 1}-ingredient-name-and-measure` }
+                    style={ { display: 'flex', gap: '4px' } }
+                  >
+                    <div>{recipe.length && recipe[0][`strIngredient${i}`]}</div>
+                    <div>{recipe.length && recipe[0][`strMeasure${i}`]}</div>
+                  </div>
                 </div>
               ))}
               <p data-testid="instructions">{e.strInstructions}</p>
