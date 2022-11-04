@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
+import '../styles/footer.css';
 
 export default function Footer() {
   const history = useHistory();
@@ -17,6 +18,7 @@ export default function Footer() {
       style={ styles }
     >
       <input
+        className="drink"
         type="image"
         src={ drinkIcon }
         alt="Icone para a página de bebidas"
@@ -24,6 +26,7 @@ export default function Footer() {
         onClick={ () => history.push('/drinks') }
       />
       <input
+        className="meals"
         type="image"
         src={ mealIcon }
         alt="Icone para a página de comidas"

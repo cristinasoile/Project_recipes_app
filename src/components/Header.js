@@ -4,17 +4,20 @@ import { Link } from 'react-router-dom';
 import iconProfile from '../images/profileIcon.svg';
 import iconSearch from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
+import '../styles/header.css';
 
 export default function Header(props) {
   const [input, setInput] = useState('');
   const [showInput, setShowInput] = useState(false);
   const { title, search } = props;
   return (
-    <header>
+    <header className="header">
 
-      <section>
+      <section className="center">
+
         <Link to="/profile">
           <button
+            className="link-profile"
             type="button"
             src={ iconProfile }
           >
@@ -25,9 +28,18 @@ export default function Header(props) {
             />
           </button>
         </Link>
+
+        <h1 data-testid="page-title">{ title }</h1>
+        { showInput && <input
+          type="text"
+          data-testid="search-input"
+          value={ input }
+          onChange={ ({ target }) => { setInput(target.value); } }
+        />}
         {
           search === 'true' ? (
             <button
+              className="lupa-icon"
               type="button"
               src={ iconSearch }
               onClick={ () => setShowInput(!showInput) }
@@ -41,13 +53,6 @@ export default function Header(props) {
           ) : null
         }
 
-        <h1 data-testid="page-title">{ title }</h1>
-        { showInput && <input
-          type="text"
-          data-testid="search-input"
-          value={ input }
-          onChange={ ({ target }) => { setInput(target.value); } }
-        />}
       </section>
       { search === 'true' && <SearchBar valueSearch={ input } title={ title } /> }
     </header>

@@ -1,0 +1,31 @@
+body {
+  background-color: rgba(170, 36, 47, 0.171);
+}
+
+.profile {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.button-profile {
+  background-color: white;
+  border: 0 solid #e5e7eb;
+  color: black;
+  cursor: pointer;
+  font-family: 'Asap', sans-serif;
+  font-weight: 600;
+  height: 35px;
+  margin: 11px 10px;
+  text-align: center;
+  text-transform: none;
+  width: 100%;
+}
+
+.button-profile:hover {
+  background-color: rgba(104, 10, 18, 0.486);
+  color: white;
+}

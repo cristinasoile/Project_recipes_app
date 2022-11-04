@@ -1,0 +1,23 @@
+footer {
+  background-color: rgb(122, 23, 23);
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+footer input {
+  background-color: rgb(122, 23, 23);
+  padding: 0.25rem;
+}
+
+footer img {
+  width: 30px;
+}
+
+.drink {
+  width: 35px;
+}
+
+.meals {
+  width: 35px;
+}

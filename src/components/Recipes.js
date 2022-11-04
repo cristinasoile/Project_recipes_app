@@ -8,6 +8,7 @@ import RecipeCard from './RecipeCard';
 import ResultsByCategory from './ResultsByCategories';
 import AppContext from '../context/AppContext';
 import { meals12recipesApi, drinks12recipesApi } from '../helpers/API';
+import '../styles/recipeCard.css';
 
 function Recipes() {
   const {
@@ -45,7 +46,7 @@ function Recipes() {
     <div>
       <Header search="true" title={ title } />
       <CategoryControls />
-      <div style={ { display: 'flex' } }>
+      <div className="recipes-main">
         {recipeList && recipeList.slice(0, twelve).map((e, i) => (
           <RecipeCard
             type={ e.strMeal ? 'meals' : 'drinks' }

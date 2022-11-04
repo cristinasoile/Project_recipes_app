@@ -8,6 +8,7 @@ import { mealDetailsApi, drinkDetailsApi } from '../helpers/API';
 import AppContext from '../context/AppContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import '../styles/recipeDetails.css';
 // import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function RecipeDetails({ location: { pathname } }) {
@@ -77,9 +78,9 @@ export default function RecipeDetails({ location: { pathname } }) {
   return (
 
     <div>
-      <RecipeDetailCard />
-      <div>
+      <div className="icons">
         <input
+          className="icon-share"
           type="image"
           src={ shareIcon }
           alt="Compartilhar receita"
@@ -88,6 +89,7 @@ export default function RecipeDetails({ location: { pathname } }) {
         />
         {isCopied && <span>Link copied!</span>}
         <input
+          className="icon-favorite"
           type="image"
           src={ whiteHeartIcon }
           alt="Favoritar receita"
@@ -95,8 +97,10 @@ export default function RecipeDetails({ location: { pathname } }) {
           onClick={ () => handleFavorite() }
         />
       </div>
+      <RecipeDetailCard />
       <Carousel />
       <button
+        className="button-start"
         type="button"
         data-testid="start-recipe-btn"
         style={ styles }

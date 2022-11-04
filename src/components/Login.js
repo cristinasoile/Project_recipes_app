@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import '../styles/login.css';
 
 function Login() {
   const { email, setEmail } = useContext(AppContext);
@@ -34,39 +35,44 @@ function Login() {
   }, [emailValid, passwordValid]);
 
   return (
-    <div>
-      <form>
+    <div className="login-mobile">
+
+      <form className="box-branco">
+        <img src="https://thumbs.dreamstime.com/b/%C3%ADcone-redondo-com-chap%C3%A9u-do-cozinheiro-chefe-51743039.jpg" alt="img" className="img-login" />
         <label htmlFor="email-input">
           <input
+            className="input-email"
             data-testid="email-input"
             type="email"
-            placeholder="digite seu email"
+            placeholder="Digite seu email"
             name="email"
             value={ email }
             onChange={ (e) => setEmail(e.target.value) }
           />
         </label>
+
         <label htmlFor="password-input">
           <input
+            className="input-senha"
             data-testid="password-input"
             type="password"
-            placeholder="digite sua senha"
+            placeholder="Digite sua senha"
             name="empasswordail"
             value={ password }
             onChange={ (e) => setPassword(e.target.value) }
           />
         </label>
+
         <button
+          className="input-button"
           type="button"
           data-testid="login-submit-btn"
-          className="login-submit-btn"
           disabled={ isDisable }
           onClick={ handleButtonClick }
         >
           ENTRAR
         </button>
       </form>
-
     </div>
   );
 }

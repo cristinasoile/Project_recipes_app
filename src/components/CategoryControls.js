@@ -2,6 +2,7 @@ import { React, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import { meals12recipesApi, drinks12recipesApi } from '../helpers/API';
+import '../styles/categoryControl.css';
 
 function CategoryControls() {
   const {
@@ -46,11 +47,12 @@ function CategoryControls() {
   };
 
   return (
-    <div>
+    <div className="category-control">
       {
         category.map(({ strCategory }) => (
           <button
             type="button"
+            className="button-category"
             key={ strCategory }
             data-testid={ `${strCategory}-category-filter` }
             value={ strCategory }
@@ -62,6 +64,7 @@ function CategoryControls() {
       }
       <button
         type="button"
+        className="button-category"
         data-testid="All-category-filter"
         value="All"
         onClick={ (event) => handleClick(event) }

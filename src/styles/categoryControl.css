@@ -1,0 +1,26 @@
+.category-control {
+  background-color: rgba(170, 36, 47, 0.171);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.button-category {
+  background-color: white;
+  border: 0 solid #e5e7eb;
+  border-radius: 7px;
+  color: black;
+  cursor: pointer;
+  font-family: 'Asap', sans-serif;
+  font-weight: 600;
+  height: 30px;
+  margin: 11px 10px;
+  text-align: center;
+  text-transform: none;
+  width: 190%;
+}
+
+.button-category:hover {
+  background-color: rgba(104, 10, 18, 0.486);
+  color: white;
+}

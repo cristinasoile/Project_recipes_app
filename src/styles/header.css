@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+body {
+  margin: 0%;
+  padding: 0%;
+  width: 100%;
+}
+
+.header {
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  align-items: center;
+  background-color: rgb(122, 23, 23);
+  background-image: url("https://intranet.tecnocomp.com.br/banco-de-imagens/imagens-de-sistema/vermelho-fundo.png/image");
+  display: flex;
+  font-family: 'Pacifico', cursive;
+  justify-content: space-between;
+  padding: 0.1px 45px;
+}
+
+.link-profile {
+  background-color: rgb(122, 23, 23);
+  border-radius: 25px;
+  font-size: 35px;
+}
+
+.link-profile:hover {
+  background-color: rgba(122, 23, 23, 0.329);
+}
+
+.lupa-icon {
+  background-color: rgb(122, 23, 23);
+  border-radius: 25px;
+  font-size: 35px;
+}
+
+.lupa-icon:hover {
+  background-color: rgba(122, 23, 23, 0.116);
+}
+
+input {
+  background-color: white;
+  border: 0 solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.searchBar {
+  align-items: center;
+  background-color: rgb(122, 23, 23);
+  background-image: url("https://intranet.tecnocomp.com.br/banco-de-imagens/imagens-de-sistema/vermelho-fundo.png/image");
+  color: white;
+  display: flex;
+  font-family: 'Asap', sans-serif;
+  font-size: 16px;
+  gap: 1.1rem;
+  justify-content: center;
+}
+
+.searchBar-button {
+  background-color: white;
+  border: 0 solid #e5e7eb;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
+  font-family: 'Asap', sans-serif;
+  font-weight: 600;
+  height: 30px;
+  margin: 11px 10px;
+  text-align: center;
+  text-transform: none;
+  width: 140%;
+}
+
+h1 {
+  font-size: 35px;
+  margin: 4px;
+}

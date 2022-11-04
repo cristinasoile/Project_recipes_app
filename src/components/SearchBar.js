@@ -23,7 +23,6 @@ export default function SearchBar({ valueSearch, title }) {
   const caseName = async () => {
     let data;
     if (title === 'Meals') {
-      console.log('AQU');
       data = await mealsNameApi(valueSearch);
       setRecipeList(data.meals);
       return data;
@@ -40,9 +39,11 @@ export default function SearchBar({ valueSearch, title }) {
       setRecipeList(data.meals);
       return data;
     }
-    data = await drinksIngredientApi(valueSearch);
-    setRecipeList(data.drinks);
-    return data;
+    if (title === 'Drinks') {
+      data = await drinksIngredientApi(valueSearch);
+      setRecipeList(data.drinks);
+      return data;
+    }
   };
 
   const caseFirstLetter = async () => {
@@ -90,7 +91,7 @@ export default function SearchBar({ valueSearch, title }) {
 
   return (
     <div>
-      <section>
+      <section className="searchBar">
         <div>
           <label htmlFor="ingredient">
             <input
@@ -131,6 +132,7 @@ export default function SearchBar({ valueSearch, title }) {
 
         <div>
           <button
+            className="searchBar-button"
             data-testid="exec-search-btn"
             type="button"
             onClick={ handleClick }

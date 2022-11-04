@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { mealRecommendationApi, drinkRecommendationApi } from '../helpers/API';
+import '../styles/recipeDetails.css';
 
 export default function Carousel() {
   const [count, setCount] = useState(0);
@@ -51,35 +52,44 @@ export default function Carousel() {
 
   return (
     <section>
-      <button
-        type="button"
-        onClick={ btnBack }
-      >
-        Back
-      </button>
-      {
-        recipes.map((e, i) => (
-          <div
-            key={ i }
-            data-testid={ `${i}-recommendation-card` }
-            hidden={ !toggleHidden(i) }
-          >
-            <h3 data-testid={ `${i}-recommendation-title` }>{ e.title }</h3>
-            <img
-              style={ { width: '100px', maxHeight: '200px' } }
-              src={ e.img }
-              alt={ e.name }
-              data-testid={ `${i}-card-img` }
-            />
-          </div>
-        ))
-      }
-      <button
-        type="button"
-        onClick={ btnNext }
-      >
-        Next
-      </button>
+      <div className="buttons">
+        <button
+          className="button-back"
+          type="button"
+          onClick={ btnBack }
+        >
+          Back
+        </button>
+
+        <button
+          className="button-next"
+          type="button"
+          onClick={ btnNext }
+        >
+          Next
+        </button>
+      </div>
+      <div className="recipes-icon-drinks">
+        {
+          recipes.map((e, i) => (
+            <div
+              className="icon-recipes"
+              key={ i }
+              data-testid={ `${i}-recommendation-card` }
+              hidden={ !toggleHidden(i) }
+            >
+              <h3 data-testid={ `${i}-recommendation-title` }>{ e.title }</h3>
+              <img
+                className="img-recipes"
+                style={ { width: '100px', maxHeight: '200px' } }
+                src={ e.img }
+                alt={ e.name }
+                data-testid={ `${i}-card-img` }
+              />
+            </div>
+          ))
+        }
+      </div>
     </section>
   );
 }
